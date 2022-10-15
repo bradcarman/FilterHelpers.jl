@@ -1,7 +1,7 @@
 name = "FilterHelpers"
 uuid = "d8f44d74-4a63-4059-add9-16c5740a0809"
 authors = ["Brad Carman <brad_carman@instron.com>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [compat]
 julia = "1"

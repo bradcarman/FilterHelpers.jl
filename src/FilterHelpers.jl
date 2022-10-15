@@ -13,16 +13,7 @@ function filterfirst(f::Function,items::Vector{T}) where T
     return nothing
 end
 
-function filterlast(f::Function,items::Vector{T}) where T
-    lastitem = nothing
-    for item in items
-        if f(item)
-            lastitem = item
-        end
-    end
-
-    return lastitem
-end
+filterlast(f::Function,items::Vector{T}) where T = filterfirst(f, reverse(items))
 
 function filtersingle(f,items::Vector{T}) where T
     
@@ -38,7 +29,7 @@ function filtersingle(f,items::Vector{T}) where T
     if n == 0
         return nothing
     elseif n == 1
-        return found[1]
+        return found[]
     elseif n > 1
         @error "Found $n items, expected 1" found
         throw(NotUniqueError())
