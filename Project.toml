@@ -1,0 +1,13 @@
+name = "FilterHelpers"
+uuid = "d8f44d74-4a63-4059-add9-16c5740a0809"
+authors = ["Brad Carman <brad_carman@instron.com>"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
