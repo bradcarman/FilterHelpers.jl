@@ -3,7 +3,7 @@ module FilterHelpers
 # EXCEPTIONS
 struct NotUniqueError <: Exception end
 
-function filterfirst(f::Function,items::Vector{T}) where T
+function filterfirst(f::Function,items::AbstractVector{T}) where T
     for item in items
         if f(item)
             return item
@@ -13,9 +13,9 @@ function filterfirst(f::Function,items::Vector{T}) where T
     return nothing
 end
 
-filterlast(f::Function,items::Vector{T}) where T = filterfirst(f, reverse(items))
+filterlast(f::Function,items::AbstractVector{T}) where T = filterfirst(f, reverse(items))
 
-function filtersingle(f,items::Vector{T}) where T
+function filtersingle(f,items::AbstractVector{T}) where T
     
     found = T[]
     for item in items

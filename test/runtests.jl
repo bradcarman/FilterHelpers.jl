@@ -1,5 +1,6 @@
 using FilterHelpers
 using Test
+using JSON3
 
 @testset "FilterHelpers.jl" begin
     struct Person
@@ -24,4 +25,27 @@ using Test
 
     @test_throws FilterHelpers.NotUniqueError filtersingle(x->x.id == 1, people)
 
+end
+
+@testset "JSON3.Array compatibility" begin
+    # Create a JSON3.Array by parsing JSON
+    json_data = """
+    [
+        {"id": 1, "name": "Brad"},
+        {"id": 2, "name": "Audra"},
+        {"id": 3, "name": "Ellie"},
+        {"id": 1, "name": "Julia"}
+    ]
+    """
+
+    people_json = JSON3.read(json_data)
+
+    # Test filtersingle with JSON3.Array
+    @test filtersingle(x->x.id == 2, people_json).name == "Audra"
+    @test isnothing(filtersingle(x->x.id == 5, people_json))
+    @test_throws FilterHelpers.NotUniqueError filtersingle(x->x.id == 1, people_json)
+
+    # Test filterfirst and filterlast as well
+    @test filterfirst(x->x.id == 1, people_json).name == "Brad"
+    @test filterlast(x->x.id == 1, people_json).name == "Julia"
 end
